@@ -1,0 +1,7 @@
+{
+    "liveServer.settings.https": {
+        "enable": true,
+        "cert": "C:\\Users\\Andi\\.vscode-ssl\\cert.pem",
+        "key": "C:\\Users\\Andi\\.vscode-ssl\\key.pem"
+    }
+}
