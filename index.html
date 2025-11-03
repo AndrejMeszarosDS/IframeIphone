@@ -33,7 +33,6 @@
 
         .iframe-container {
             width: 100%;
-            max-width: 800px;
             background-color: white;
             border: 1px solid #ccc;
             border-radius: 8px;
@@ -64,25 +63,41 @@
 
     <main>
         <div class="iframe-container">
-            <iframe id="testFrame"
+            <!-- <iframe id="testFrame"
                 src="https://www.epojisteni.cz/kalkulace-povinne-ab/?frame=nosteps&pid=243&utm_source=test"
-                title="Test Iframe"></iframe>
+                title="Test Iframe"></iframe> -->
+
+
+            <iframe src="https://localhost:44301/vyber-povinne/tFlzg5EN_pYuap2odEMzyQ2/?frame=nosteps" width="100%"
+                frameborder="0" scrolling="yes" onload="iframeLoad(this);" id="iFrameResizer0"
+                style="overflow: hidden; height: 3000px;"></iframe>
+
+
         </div>
+
+
+
+
+
+
+
     </main>
 
     <footer>
         © 2025 Iframe Tester Example
     </footer>
 
-    <!-- Include iframe-resizer -->
-    <script src="https://cdn.jsdelivr.net/npm/iframe-resizer@4.3.6/js/iframeResizer.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/iframe-resizer@4.3.6/js/iframeResizer.min.js"></script>
     <script>
         // Initialize iframeResizer on the iframe
         iFrameResize({
             log: true, // set to false when done testing
             checkOrigin: false
         }, '#testFrame');
-    </script>
+    </script> -->
+    <!-- <script src="https://produkty.espoluprace.cz/Content/js/iframe.js"></script> -->
+    <script type="text/javascript" src="/script.js"></script>
+
 </body>
 
 </html>
