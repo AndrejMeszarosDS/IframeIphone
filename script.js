@@ -12,9 +12,7 @@ function iframeLoad(iframe) {
         log: true,
         autoResize: false,
         checkOrigin: false,
-        heightCalculationMethod: 'documentElementScroll',
-        resizeFrom: 'child',
-        sizeWidth: false,
+        heightCalculationMethod: 'max',
     }, iframe);
     setTimeout(function () {
         iframe.iFrameResizer.resize();
