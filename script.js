@@ -9,7 +9,6 @@
 
 function iframeLoad(iframe) {
     iFrameResize({
-        log: true,
         autoResize: false,
         checkOrigin: false,
         heightCalculationMethod: 'documentElementScroll',
