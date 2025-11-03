@@ -9,10 +9,9 @@
 
 function iframeLoad(iframe) {
     iFrameResize({
-        log: true,
-        autoResize: false,
         checkOrigin: false,
-        heightCalculationMethod: 'max',
+        heightCalculationMethod: 'lowestElement',
+        bodyPadding: '1px 0'
     }, iframe);
     setTimeout(function () {
         iframe.iFrameResizer.resize();
