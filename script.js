@@ -16,7 +16,6 @@ function iframeLoad(iframe) {
         messageCallback: function (data) {
             const msg = data.message;
             const iframe = data.iframe;
-            console.log(msg)
             if (msg.type === 'modalOpened') {
                 previousScrollY = window.scrollY;
 
@@ -37,7 +36,7 @@ function iframeLoad(iframe) {
                 window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
             }
 
-            if (msg === 'modalClosed') {
+            if (msg.type === 'modalClosed') {
                 window.scrollTo({ top: previousScrollY, behavior: 'smooth' });
             }
         }
