@@ -9,6 +9,7 @@
 
 function iframeLoad(iframe) {
     iFrameResize({
+        log: true,
         checkOrigin: false,
         heightCalculationMethod: 'lowestElement',
         bodyPadding: '1px 0'
