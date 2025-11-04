@@ -38,6 +38,7 @@ function iframeLoad(iframe) {
             }
 
             if (msg === 'modalClosed') {
+                console.log(previousScrollY)
                 window.scrollTo({ top: previousScrollY, behavior: 'smooth' });
             }
         }
