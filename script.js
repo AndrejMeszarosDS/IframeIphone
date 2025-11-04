@@ -12,7 +12,35 @@ function iframeLoad(iframe) {
         log: true,
         checkOrigin: false,
         heightCalculationMethod: 'lowestElement',
-        bodyPadding: '1px 0'
+        bodyPadding: '1px 0',
+        messageCallback: function (data) {
+            const msg = data.message;
+            const iframe = data.iframe;
+
+            if (msg.type === 'modalOpened') {
+                previousScrollY = window.scrollY;
+
+                const modalTop = msg.top;
+                const modalHeight = msg.height;
+
+                const iframeRect = iframe.getBoundingClientRect();
+                const viewportHeight = window.innerHeight;
+                const padding = 20;
+
+                let scrollTarget;
+                if (modalHeight < viewportHeight) {
+                    scrollTarget = window.scrollY + iframeRect.top + modalTop - viewportHeight / 2 + modalHeight / 2;
+                } else {
+                    scrollTarget = window.scrollY + iframeRect.top + modalTop - padding;
+                }
+
+                window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
+            }
+
+            if (msg === 'modalClosed') {
+                window.scrollTo({ top: previousScrollY, behavior: 'smooth' });
+            }
+        }
     }, iframe);
     setTimeout(function () {
         iframe.iFrameResizer.resize();
