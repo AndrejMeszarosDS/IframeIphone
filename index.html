@@ -98,7 +98,7 @@
 
     <main>
         <div class="iframe-container">
-            <iframe id="iFrameResizer0" src="https://www.wikipedia.org" frameborder="0" scrolling="yes"
+            <iframe id="iFrameResizer0" frameborder="0" scrolling="yes"
                 style="overflow: hidden; height: 3000px;"></iframe>
         </div>
     </main>
@@ -115,7 +115,7 @@
         ];
 
         function loadIframe(index) {
-            const iframe = document.getElementById("testIframe");
+            const iframe = document.getElementById("iFrameResizer0");
             const buttons = document.querySelectorAll(".button-bar button");
 
             iframe.src = iframeUrls[index];
