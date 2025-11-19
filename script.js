@@ -39,9 +39,41 @@ function iframeLoad(iframe) {
             if (msg.type === 'modalClosed') {
                 window.scrollTo({ top: previousScrollY, behavior: 'smooth' });
             }
+
+            if (msg.type === 'scrollTop') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         }
     }, iframe);
     setTimeout(function () {
         iframe.iFrameResizer.resize();
     }, 50);
 }
+
+const iframe = document.getElementById('iFrameResizer0');
+
+window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    console.log(scrollTop)
+
+    // Get the iframe's position relative to the viewport
+    const rect = iframe.getBoundingClientRect();
+    console.log('Top relative to viewport:', rect.top);
+
+    // If you want the position relative to the **top of the document** (page scroll included):
+    const topFromDocument = rect.top + window.scrollY;
+    console.log('Top relative to document:', topFromDocument);
+
+    const winHeight = window.innerHeight;
+
+
+
+    const setSticky = topFromDocument - rect.top + winHeight - 250;
+    console.log('Sent data :', setSticky);
+
+
+    iframe.contentWindow.postMessage(
+        JSON.stringify({ type: 'iframeScroll', top: setSticky }),
+        '*'
+    );
+});
