@@ -17,6 +17,7 @@ function iframeLoad(iframe) {
             const msg = data.message;
             const iframe = data.iframe;
             if (msg.type === 'modalOpened') {
+                console.log('modalOpened')
                 previousScrollY = window.scrollY;
 
                 const modalTop = msg.top;
@@ -37,41 +38,45 @@ function iframeLoad(iframe) {
             }
 
             if (msg.type === 'modalClosed') {
+                console.log('modalClosed')
                 window.scrollTo({ top: previousScrollY, behavior: 'smooth' });
             }
 
             if (msg.type === 'scrollTop') {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                detailPreviousScrollY = window.scrollY;
+                console.log('scrollTop: ', detailPreviousScrollY)
+                setTimeout(function () {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 200);
+            }
+            if (msg.type === 'scrollBack') {
+                console.log('scrollBack: ', detailPreviousScrollY)
+                setTimeout(function () {
+                    window.scrollTo({ top: detailPreviousScrollY, behavior: 'smooth' });
+                }, 200);
+            }
+            if (msg.type === 'scrollToSection') {
+                const sectionTop = msg.top;
+                console.log('scrollToSection: ', sectionTop)
+                setTimeout(function () {
+                    window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+                }, 50);
             }
         }
     }, iframe);
     setTimeout(function () {
         iframe.iFrameResizer.resize();
-    }, 50);
+    }, 100);
 }
 
 const iframe = document.getElementById('iFrameResizer0');
 
 window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    console.log(scrollTop)
-
-    // Get the iframe's position relative to the viewport
+    const scrollY = window.scrollY;
+    const viewportH = window.innerHeight;
     const rect = iframe.getBoundingClientRect();
-    console.log('Top relative to viewport:', rect.top);
-
-    // If you want the position relative to the **top of the document** (page scroll included):
-    const topFromDocument = rect.top + window.scrollY;
-    console.log('Top relative to document:', topFromDocument);
-
-    const winHeight = window.innerHeight;
-
-
-
-    const setSticky = topFromDocument - rect.top + winHeight - 250;
-    console.log('Sent data :', setSticky);
-
-
+    const iframeTop = rect.top + scrollY;
+    const setSticky = scrollY + (viewportH - iframeTop);
     iframe.contentWindow.postMessage(
         JSON.stringify({ type: 'iframeScroll', top: setSticky }),
         '*'
