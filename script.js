@@ -19,6 +19,7 @@ function iframeLoad(iframe) {
             if (msg.type === 'modalOpened') {
                 console.log('modalOpened')
                 previousScrollY = window.scrollY;
+                console.log('previousScrollY: ', previousScrollY)
 
                 const modalTop = msg.top;
                 const modalHeight = msg.height;
