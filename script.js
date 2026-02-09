@@ -70,9 +70,9 @@ function iframeLoad(iframe) {
     }, 100);
 }
 
-const iframe = document.getElementById('iFrameResizer0');
+const iframe = document.getElementById('epIframe');
 
-window.addEventListener('scroll', () => {
+function SendScrollPosition() {
     const scrollY = window.scrollY;
     const viewportH = window.innerHeight;
     const rect = iframe.getBoundingClientRect();
@@ -82,4 +82,13 @@ window.addEventListener('scroll', () => {
         JSON.stringify({ type: 'iframeScroll', top: setSticky }),
         '*'
     );
+}
+
+window.addEventListener('scrollstop', () => {
+    SendScrollPosition();
 });
+
+setInterval(function () {
+    SendScrollPosition();
+    console.log('Scroll position sent');
+}, 200);
