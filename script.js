@@ -9,7 +9,7 @@
 
 function iframeLoad(iframe) {
     iFrameResize({
-        log: true,
+        log: false,
         checkOrigin: false,
         heightCalculationMethod: 'lowestElement',
         bodyPadding: '1px 0',
@@ -17,9 +17,7 @@ function iframeLoad(iframe) {
             const msg = data.message;
             const iframe = data.iframe;
             if (msg.type === 'modalOpened') {
-                console.log('modalOpened')
                 previousScrollY = window.scrollY;
-                console.log('previousScrollY: ', previousScrollY)
 
                 const modalTop = msg.top;
                 const modalHeight = msg.height;
@@ -39,26 +37,22 @@ function iframeLoad(iframe) {
             }
 
             if (msg.type === 'modalClosed') {
-                console.log('modalClosed')
                 window.scrollTo({ top: previousScrollY, behavior: 'smooth' });
             }
 
             if (msg.type === 'scrollTop') {
                 detailPreviousScrollY = window.scrollY;
-                console.log('scrollTop: ', detailPreviousScrollY)
                 setTimeout(function () {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }, 200);
             }
             if (msg.type === 'scrollBack') {
-                console.log('scrollBack: ', detailPreviousScrollY)
                 setTimeout(function () {
                     window.scrollTo({ top: detailPreviousScrollY, behavior: 'smooth' });
                 }, 200);
             }
             if (msg.type === 'scrollToSection') {
                 const sectionTop = msg.top;
-                console.log('scrollToSection: ', sectionTop)
                 setTimeout(function () {
                     window.scrollTo({ top: sectionTop, behavior: 'smooth' });
                 }, 50);
@@ -90,5 +84,4 @@ window.addEventListener('scrollstop', () => {
 
 setInterval(function () {
     SendScrollPosition();
-    console.log('Scroll position sent');
 }, 200);
